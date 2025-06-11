@@ -1,29 +1,29 @@
 import { SectionHeader } from "../header/header";
 
-const reviews = [
-  {
-    id: 1,
-    name: "Olga",
-    title: "A real sense of community, nurtured",
-    work: "Weave Studios – Kai Tak",
-    src: "/reviews-img1.jpg",
-  },
+// const reviews = [
+//   {
+//     id: 1,
+//     name: "Olga",
+//     title: "A real sense of community, nurtured",
+//     work: "Weave Studios – Kai Tak",
+//     src: "/reviews-img1.jpg",
+//   },
 
-  {
-    id: 2,
-    name: "Thomas",
-    title: "“The facilities are superb. Clean, slick, bright.”",
-    work: "Weave Studios – Olympic",
-    src: "/reviews-img2.jpg",
-  },
-  {
-    id: 1,
-    name: "Ol",
-    title: "A real sense of community, nurtured",
-    work: "Weave Studios – Kai Tak",
-    src: "/reviews-img1.jpg",
-  },
-];
+//   {
+//     id: 2,
+//     name: "Thomas",
+//     title: "“The facilities are superb. Clean, slick, bright.”",
+//     work: "Weave Studios – Olympic",
+//     src: "/reviews-img2.jpg",
+//   },
+//   {
+//     id: 1,
+//     name: "Eliot",
+//     title: "“A real sense of community, nurtured”",
+//     work: "Weave Studios – Kai Tak",
+//     src: "/reviews-img3.jpg",
+//   },
+// ];
 
 export function Review() {
   return (
