@@ -1,26 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap");
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-primary: #112211;
+  --color-secondary: #8dd3bb;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-salmon: #fd736e;
+  --font-sans: "Montserrat", sans-serif;
+  --font-trade: "Oswald", sans-serif;
+  --shadow-card: 0px 4px 16px 0px #8dd3bb26;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.default_hero_shadow {
+  background: linear-gradient(
+    360deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+.default_hero_shadow_reverse {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.navigate {
+  position: relative;
+}
+.navigate::after {
+  position: absolute;
+  content: " ";
+  left: 3px;
+  bottom: 0;
+  width: 0;
+  background-color: var(--color-secondary);
+  height: 2px;
+  transition: width 0.5s ease-in-out;
+}
+
+.navigate_active::after {
+  width: 70px;
+}
+
+.btn1 {
+  transition: 0.2s ease-in-out;
+}
+
+.btn1:hover {
+  background: var(--color-secondary);
+  color: var(--color-white);
+}
+.btn2 {
+  border: 1px solid transparent;
+  transition: 0.2s ease-in-out;
+}
+.btn2:hover {
+  background: var(--color-white);
+  color: var(--color-primary);
+  border-color: var(--color-secondary);
+}
+
+@layer utilities {
+  .paddingX {
+    @apply sm:px-10 px-6;
+  }
+  .boxWidth {
+    @apply 2xl:max-w-[1480px] w-full;
+  }
+  .paddingY {
+    @apply sm:py-16 py-8;
+  }
+  .flex__center {
+    @apply flex justify-center items-center;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .search_label {
+    @apply absolute top-[-12px] left-[6px] px-2 bg-white z-2 text-sm;
+  }
+  .search_input {
+    @apply py-2 px-3 outline-none box-border;
+  }
+  .search_input_container {
+    @apply border-1 border-primary flex items-center rounded-[5px];
+  }
+  .paragraph {
+    @apply font-normal font-sans text-base;
+  }
 }
