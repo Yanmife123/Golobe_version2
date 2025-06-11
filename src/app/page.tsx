@@ -5,6 +5,7 @@ import { PlanTrip } from "@/component/default/plantrip";
 import { CardContainer } from "@/component/UI/golobeUI";
 import { GolobeSection } from "@/component/default/golobeSection";
 import { Review } from "@/component/default/reviews";
+import { Footer } from "@/component/footer/footer";
 import {
   SearchFlightForm,
   SearchStayForm,
@@ -56,12 +57,13 @@ export default function Home() {
                         setSearchNavClicked(false);
                       }}
                     >
-                      <Image
-                        src={"/plane.svg"}
-                        alt="flight Icon"
-                        height={24}
-                        width={24}
-                      />
+                      <div className="relative h-[24px] w-[24px] ">
+                        <Image
+                          src={"/plane.svg"}
+                          alt="flight Icon"
+                          fill={true}
+                        />
+                      </div>
                       <div className="text-primary font-semibold font-sans">
                         Flights
                       </div>
@@ -74,12 +76,13 @@ export default function Home() {
                         setSearchNavClicked(true);
                       }}
                     >
-                      <Image
-                        src={"/hostel.svg"}
-                        alt="flight Icon"
-                        height={24}
-                        width={24}
-                      />
+                      <div className="relative h-[24px] w-[24px]">
+                        <Image
+                          src={"/hostel.svg"}
+                          alt="flight Icon"
+                          fill={true}
+                        />
+                      </div>
                       <div className="text-primary font-semibold font-sans">
                         Stays
                       </div>
@@ -94,6 +97,7 @@ export default function Home() {
           <GolobeSection />
           <Review />
         </div>
+        <Footer />
       </div>
     </main>
   );

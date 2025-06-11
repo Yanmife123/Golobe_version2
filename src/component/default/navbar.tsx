@@ -25,13 +25,15 @@ export default function Navbar() {
           </li>
         ))}
       </ul>
-      <div>
+      <div className="relative w-[114px] h-[34px]">
         <Image
           src={"/Logo-white.svg"}
           alt="Golobe Icon"
-          width={114}
-          height={34}
-          className=" brightness-100"
+          // width={114}
+          // height={34}
+          fill={true}
+          // style={{ width: "auto", height: "auto" }}
+          className="brightness-100"
         />
       </div>
       <div>

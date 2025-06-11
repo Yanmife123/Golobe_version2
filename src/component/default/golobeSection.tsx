@@ -24,12 +24,12 @@ export function GolobeSection() {
         <div className="max-sm:w-[85%] max-w-[1200px] flex md:flex-row flex-col gap-8">
           {golobeSection.map((data) => (
             <div className="flex relative flex-1 shadow-card" key={data.id}>
-              <div className="">
+              <div className=" w-[448px] md:w-[350px] lg:w-[448px] h-[448px] relative">
                 <Image
                   src={data.src}
                   alt={data.title}
-                  height={448}
-                  width={448}
+                  fill={true}
+                  // sizes="(max-width: 768px) 90vw, 448px"
                 />
               </div>
               <div className="absolute z-[1] top-0 left-0 h-full w-full default_hero_shadow_reverse rounded-[20px]" />
