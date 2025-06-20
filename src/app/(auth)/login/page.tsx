@@ -18,7 +18,7 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginType>();
-  const onSubmit: SubmitHandler<LoginType> = (data: any) => {
+  const onSubmit: SubmitHandler<LoginType> = (data) => {
     console.log(data);
   };
   return (
@@ -80,7 +80,7 @@ export default function Login() {
             <FormBtn className="mt-4 w-full">Login</FormBtn>
             <div className="mt-3">
               <p className="text-sm font-sans text-center">
-                Don't have an Account?{" "}
+                Don&apos;t have an Account?{" "}
                 <Link href="/register" className="text-salmon font-medium">
                   Register
                 </Link>

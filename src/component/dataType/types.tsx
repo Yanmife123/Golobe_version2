@@ -12,5 +12,5 @@ export interface InputType {
   placeholder?: string;
   classNameInput?: string;
   classNameLabel?: string;
-  register?: UseFormRegisterReturn<any>;
+  register?: UseFormRegisterReturn;
 }
