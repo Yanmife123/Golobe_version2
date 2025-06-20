@@ -32,6 +32,7 @@ export function BtnLink1({ children, href, className }: Props) {
     </Link>
   );
 }
+
 export function BtnLink2({ children, href, className }: Props) {
   return (
     <Link

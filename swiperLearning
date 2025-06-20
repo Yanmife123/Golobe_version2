@@ -1,0 +1,35 @@
+// Import React components from Swiper
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/autoplay";
+
+// Register autoplay module
+Swiper.use([Autoplay]);
+
+export default function LoginSlider() {
+  return (
+    <Swiper
+      slidesPerView={1}
+      loop={true}
+      autoplay={{
+        delay: 3000,
+        disableOnInteraction: false,
+      }}
+      allowTouchMove={false} // Optional: disables manual swipe
+      className="w-full h-full"
+    >
+      <SwiperSlide>
+        <img src="/images/slide1.jpg" className="w-full h-full object-cover" />
+      </SwiperSlide>
+      <SwiperSlide>
+        <img src="/images/slide2.jpg" className="w-full h-full object-cover" />
+      </SwiperSlide>
+      <SwiperSlide>
+        <img src="/images/slide3.jpg" className="w-full h-full object-cover" />
+      </SwiperSlide>
+    </Swiper>
+  );
+}

@@ -1,0 +1,97 @@
+"use client";
+import { useForm, SubmitHandler } from "react-hook-form";
+import Link from "next/link";
+import AuthSection from "@/component/page/Auth/Authsection";
+import AuthHeader from "@/component/page/Auth/AuthHeader";
+import OtherLoginOptions from "@/component/page/OtherLoginOptions";
+import Input from "@/component/utility/input";
+import { FormBtn } from "@/component/utility/button";
+
+type LoginType = {
+  email: string;
+  password: string;
+};
+
+export default function Login() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginType>();
+  const onSubmit: SubmitHandler<LoginType> = (data: any) => {
+    console.log(data);
+  };
+  return (
+    <AuthSection>
+      <div className="flex flex-col gap-10">
+        <AuthHeader
+          h2="Login"
+          paragraph="Login to access your Golobe account"
+        />
+        <form className="flex flex-col gap-6" onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <Input
+              name="email"
+              type="email"
+              label="email"
+              classNameInput="px-2 py-2 border-1 border-grey rounded-[4px]"
+              register={register("email", {
+                required: "This input is required",
+              })}
+            />
+            {typeof errors.email?.message === "string" && (
+              <p className="text-salmon text-xs mt-2">{errors.email.message}</p>
+            )}
+          </div>
+          <div>
+            <Input
+              name="password"
+              type="password"
+              label="password"
+              classNameInput="px-2 py-2 border-1 border-grey rounded-[4px]"
+              register={register("password", {
+                required: "This input is required",
+              })}
+            />
+            {typeof errors.password?.message === "string" && (
+              <p className="text-salmon text-xs mt-2">
+                {errors.password.message}
+              </p>
+            )}
+          </div>
+          <div className="flex justify-between">
+            <div className="flex gap-2 items-center">
+              <input type="checkbox" id="rememberMe" />
+              <div className="text-primary text-sm font-medium font-sans">
+                Remember me
+              </div>
+            </div>
+            <div>
+              <Link
+                href={"/forgottenPassword"}
+                className="text-salmon text-sm font-medium font-sans"
+              >
+                Forgot Password?
+              </Link>
+            </div>
+          </div>
+
+          <div>
+            <FormBtn className="mt-4 w-full">Login</FormBtn>
+            <div className="mt-3">
+              <p className="text-sm font-sans text-center">
+                Don't have an Account?{" "}
+                <Link href="/register" className="text-salmon font-medium">
+                  Register
+                </Link>
+              </p>
+            </div>
+          </div>
+        </form>
+        <div className="mt-6">
+          <OtherLoginOptions paragraph="Or login with" />
+        </div>
+      </div>
+    </AuthSection>
+  );
+}

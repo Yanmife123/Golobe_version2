@@ -48,7 +48,7 @@ export default function Navbar() {
           </li>
           <li>
             <Link
-              href={"/signUp"}
+              href={"/register"}
               className="px-6 py-3 bg-white text-primary text-sm rounded-[8px] font-semibold"
             >
               Sign Up

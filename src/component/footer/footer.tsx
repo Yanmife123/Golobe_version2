@@ -21,7 +21,7 @@ function FooterForm() {
 
 export function Footer() {
   return (
-    <footer className="mt-12 relative h-auto py-16 shadow-card">
+    <footer className="mt-12 relative h-auto pt-16 shadow-card">
       <div className="h-[340px] absolute top-0 left-0 w-full flex justify-center z-2">
         <div className="lg:w-[80%] w-[95%] h-full bg-mintygreen brightness-100 shadow-card rounded-[20px] z-2 px-6">
           <div className="w-full flex justify-between h-full">

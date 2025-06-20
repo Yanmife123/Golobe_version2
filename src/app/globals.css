@@ -7,11 +7,32 @@
   --color-secondaryLight: #8dd3bb66;
   --color-mintygreen: #cdeae1;
   --color-white: #ffffff;
+  --color-whiteSmoke: #fafbfc;
   --color-black: #000000;
+  --color-grey: #79747e;
   --color-salmon: #fd736e;
   --font-sans: "Montserrat", sans-serif;
   --font-trade: "Oswald", sans-serif;
   --shadow-card: 0px 4px 16px 0px #8dd3bb26;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: black !important;
+  -webkit-box-shadow: 0 0 0px 1000px #fafbfc inset;
+  font-family: Montserrat;
+}
+
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+}
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
 }
 
 .default_hero_shadow {
@@ -73,7 +94,7 @@
     @apply 2xl:max-w-[1480px] w-full;
   }
   .paddingY {
-    @apply sm:py-16 py-8;
+    @apply sm:py-14 py-8;
   }
   .flex__center {
     @apply flex justify-center items-center;
@@ -82,7 +103,7 @@
 
 @layer components {
   .search_label {
-    @apply absolute top-[-12px] left-[6px] px-2 bg-white z-2 text-sm;
+    @apply absolute top-[-12px] left-[6px] px-2 bg-whiteSmoke z-2 text-sm;
   }
   .search_input {
     @apply py-2 px-3 outline-none box-border;
