@@ -1,11 +1,12 @@
 "use client";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
-import AuthSection from "@/component/page/Auth/Authsection";
-import AuthHeader from "@/component/page/Auth/AuthHeader";
-import OtherLoginOptions from "@/component/page/OtherLoginOptions";
-import Input from "@/component/utility/input";
-import { FormBtn } from "@/component/utility/button";
+import AuthSection from "@/components/page/Auth/Authsection";
+import AuthHeader from "@/components/page/Auth/AuthHeader";
+import OtherLoginOptions from "@/components/page/Auth/OtherLoginOptions";
+import OtherLink from "@/components/page/Auth/Otherlink";
+import Input from "@/components/utility/input";
+import { FormBtn } from "@/components/utility/button";
 
 type LoginType = {
   email: string;
@@ -90,6 +91,7 @@ export default function Login() {
         </form>
         <div className="mt-6">
           <OtherLoginOptions paragraph="Or login with" />
+          <OtherLink />
         </div>
       </div>
     </AuthSection>

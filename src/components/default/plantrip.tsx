@@ -103,14 +103,14 @@ export function PlanTrip() {
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <p className="text-primary text-base font-sans font-semibold">
+                  <p className="text-primaryT text-base font-sans font-semibold">
                     {trip.title}
                   </p>
                   <ul className="list-none flex gap-2 items-center">
                     <li>
                       <Link
                         href={trip.flight}
-                        className="text-primary text-sm font-medium  font-sans"
+                        className="text-primaryT text-sm font-medium  font-sans"
                       >
                         Flight
                       </Link>
@@ -119,7 +119,7 @@ export function PlanTrip() {
                     <li>
                       <Link
                         href={trip.hotel}
-                        className="text-primary text-sm font-medium  font-sans"
+                        className="text-primaryT text-sm font-medium  font-sans"
                       >
                         Hotels
                       </Link>
@@ -128,7 +128,7 @@ export function PlanTrip() {
                     <li>
                       <Link
                         href={trip.resort}
-                        className="text-primary text-sm font-medium  font-sans"
+                        className="text-primaryT text-sm font-medium  font-sans"
                       >
                         Resorts
                       </Link>

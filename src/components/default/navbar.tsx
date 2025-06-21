@@ -49,7 +49,7 @@ export default function Navbar() {
           <li>
             <Link
               href={"/register"}
-              className="px-6 py-3 bg-white text-primary text-sm rounded-[8px] font-semibold"
+              className="px-6 py-3 bg-white text-primaryT text-sm rounded-[8px] font-semibold"
             >
               Sign Up
             </Link>

@@ -1,0 +1,2 @@
+id=  537030715018-bbtkf95aq5no5v3tm1c00cng2tt0deuk.apps.googleusercontent.com
+secrret = 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

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Button } from "../shadcn-uI/button";
 
 interface Props {
   children: React.ReactNode;
@@ -14,11 +15,11 @@ export function FormBtn({
   className?: string;
 }) {
   return (
-    <button
-      className={`bg-secondary text-primary font-semibold text-sm px-6 py-3 rounded-[8px] ${className} cursor-pointer font-sans `}
+    <Button
+      className={`w-full h-auto py-3 bg-secondaryT text-primaryT font-sans font-semibold hover:bg-mintygreen ${className} cursor-pointer`}
     >
       {children}
-    </button>
+    </Button>
   );
 }
 
@@ -26,7 +27,7 @@ export function BtnLink1({ children, href, className }: Props) {
   return (
     <Link
       href={href}
-      className={`${className} btn1 border-1 border-secondary rounded-[5px] px-4 py-2 text-sm font-sans font-medium text-primary`}
+      className={`${className} btn1 border-1 border-secondaryT rounded-[5px] px-4 py-2 text-sm font-sans font-medium text-primaryT`}
     >
       {children}
     </Link>
@@ -37,7 +38,7 @@ export function BtnLink2({ children, href, className }: Props) {
   return (
     <Link
       href={href}
-      className={`${className} bg-secondary rounded-[5px] px-4 py-2 text-sm font-sans font-medium text-primary `}
+      className={`${className} bg-secondaryT rounded-[5px] px-4 py-2 text-sm font-sans font-medium text-primaryT `}
     >
       {children}
     </Link>

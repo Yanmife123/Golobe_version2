@@ -1,4 +1,4 @@
-import { BtnLink1 } from "../utility/button";
+import { BtnLink1 } from "@/components/utility/button";
 
 interface PropsSectionHeader {
   title: string[];
@@ -18,7 +18,7 @@ export function Heading1({
       <h1 className="text-3xl font-semibold font-sans text-black sm:text-start text-center">
         {headTitle}
       </h1>
-      <p className="text-primary font-base font-sans font-normal sm:text-start text-center opacity-75 tracking-wide">
+      <p className="text-primaryT font-base font-sans font-normal sm:text-start text-center opacity-75 tracking-wide">
         {paragraph}
       </p>
     </div>

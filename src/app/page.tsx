@@ -1,15 +1,15 @@
 "use client";
 import { useState } from "react";
-import Navbar from "@/component/default/navbar";
-import { PlanTrip } from "@/component/default/plantrip";
-import { CardContainer } from "@/component/UI/golobeUI";
-import { GolobeSection } from "@/component/default/golobeSection";
-import { Review } from "@/component/default/reviews";
-import { Footer } from "@/component/footer/footer";
+import Navbar from "@/components/default/navbar";
+import { PlanTrip } from "@/components/default/plantrip";
+import { CardContainer } from "@/components/UI/golobeUI";
+import { GolobeSection } from "@/components/default/golobeSection";
+import { Review } from "@/components/default/reviews";
+import { Footer } from "@/components/footer/footer";
 import {
   SearchFlightForm,
   SearchStayForm,
-} from "@/component/searchForm/searchForm";
+} from "@/components/searchForm/searchForm";
 import Image from "next/image";
 
 export default function Home() {
@@ -64,7 +64,7 @@ export default function Home() {
                           fill={true}
                         />
                       </div>
-                      <div className="text-primary font-semibold font-sans">
+                      <div className="text-primaryT font-semibold font-sans">
                         Flights
                       </div>
                     </div>
@@ -83,7 +83,7 @@ export default function Home() {
                           fill={true}
                         />
                       </div>
-                      <div className="text-primary font-semibold font-sans">
+                      <div className="text-primaryT font-semibold font-sans">
                         Stays
                       </div>
                     </div>

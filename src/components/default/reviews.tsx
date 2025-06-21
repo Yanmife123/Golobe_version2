@@ -42,10 +42,10 @@ export function Review() {
             >
               <div className="absolute top-5 left-6 rounded-[20px] bg-secondaryLight h-full w-full z-[-1]" />
               <div className="flex flex-col gap-6">
-                <h2 className="text-2xl font-trade font-bold text-primary">
+                <h2 className="text-2xl font-trade font-bold text-primaryT">
                   {review.title}
                 </h2>
-                <p className="text-sm font-medium font-sans opacity-50 text-primary">
+                <p className="text-sm font-medium font-sans opacity-50 text-primaryT">
                   Really appreciate the help and support from the staff during
                   these tough times. Shoutout to Katie for helping me always,
                   even when I was out of the country. And always available when
@@ -95,10 +95,10 @@ export function Review() {
                     </div>
                   </div>
                   <div className="flex flex-col gap-1">
-                    <h4 className="text-sm text-primary font-bold font-trade">
+                    <h4 className="text-sm text-primaryT font-bold font-trade">
                       {review.name}
                     </h4>
-                    <p className="mt-2 opacity-50 text-[0.75rem] text-primary font-medium">
+                    <p className="mt-2 opacity-50 text-[0.75rem] text-primaryT font-medium">
                       {review.work}
                     </p>
                     <div className="flex items-center gap-2">
@@ -108,7 +108,7 @@ export function Review() {
                         width={24}
                         height={24}
                       />
-                      <div className="text-[0.75rem] font-trade font-bold text-primary opacity-40">
+                      <div className="text-[0.75rem] font-trade font-bold text-primaryT opacity-40">
                         Google
                       </div>
                     </div>
