@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "motion/react";
 
 export default function AuthSection({
@@ -14,7 +16,7 @@ export default function AuthSection({
       transition={{ delay: 0.1, duration: 0.4, ease: "easeInOut" }}
       className={` ${className}`}
     >
-      {children}
+      <div className="flex flex-col gap-10">{children}</div>
     </motion.div>
   );
 }
