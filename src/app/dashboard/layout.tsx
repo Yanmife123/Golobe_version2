@@ -1,5 +1,5 @@
 import DashboardNarbar from "@/components/layout/dashboard/navbar";
-import { DashboardFooter } from "@/components/layout/dashboard/footer";
+// import { DashboardFooter } from "@/components/layout/dashboard/footer";
 import { NavFooter } from "@/components/layout/dashboard/navFooter";
 export default function DashboardLayout({
   children,
