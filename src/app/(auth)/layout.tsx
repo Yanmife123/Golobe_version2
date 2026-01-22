@@ -1,5 +1,6 @@
 import ImageSlider from "@/components/UI/slider";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function AuthLayout({
   children,
@@ -14,13 +15,15 @@ export default function AuthLayout({
         </div>
         <div className="flex-1 border-1 border-transparent flex justify-center">
           <div className="lg:w-[80%] md:w-[90%] w-full h-full flex flex-col justify-center">
-            <Image
-              src={"/Logo.svg"}
-              alt="Golobe Logo"
-              width={110}
-              height={36}
-              priority={true}
-            />
+            <Link href="/">
+              <Image
+                src={"/Logo.svg"}
+                alt="Golobe Logo"
+                width={110}
+                height={36}
+                priority={true}
+              />
+            </Link>
             <div className="mt-8">{children}</div>
           </div>
         </div>

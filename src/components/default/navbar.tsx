@@ -25,7 +25,7 @@ export default function Navbar() {
           </li>
         ))}
       </ul>
-      <div className="relative w-[114px] h-[34px]">
+      <div className="relative w-[114px] h-[34px] border-2">
         <Image
           src={"/Logo-white.svg"}
           alt="Golobe Icon"
