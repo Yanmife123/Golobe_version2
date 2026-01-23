@@ -1,15 +1,17 @@
 "use client";
 import { useState } from "react";
-import Navbar from "@/components/default/navbar";
-import { PlanTrip } from "@/components/default/plantrip";
+
+import Navbar from "@/components/page/landingpage/default/navbar";
+import { PlanTrip } from "@/components/page/landingpage/default/plantrip";
 import { CardContainer } from "@/components/UI/golobeUI";
-import { GolobeSection } from "@/components/default/golobeSection";
-import { Review } from "@/components/default/reviews";
-import { Footer } from "@/components/footer/footer";
+
+import { GolobeSection } from "@/components/page/landingpage/default/golobeSection";
+import { Review } from "@/components/page/landingpage/default/reviews";
+import { Footer } from "@/components/page/landingpage/footer/footer";
 import {
   SearchFlightForm,
   SearchStayForm,
-} from "@/components/searchForm/searchForm";
+} from "@/components/page/landingpage/searchForm/searchForm";
 import Image from "next/image";
 
 export default function Home() {

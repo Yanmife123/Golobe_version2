@@ -1,3 +1,9 @@
+import { HeroSectionFlight } from "@/components/page/dashboard/flight/heroSection";
 export default function DashboardPage() {
-  return <div>Golobe Client Dashboardpage</div>;
+  return (
+    <div>
+      <HeroSectionFlight />
+      <div className="paddingX"></div>
+    </div>
+  );
 }

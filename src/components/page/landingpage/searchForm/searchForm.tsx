@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FormBtn } from "../utility/button";
+import { FormBtn } from "../../../utility/button";
 
 export function SearchFlightForm() {
   return (

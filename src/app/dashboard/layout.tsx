@@ -9,7 +9,9 @@ export default function DashboardLayout({
   return (
     <div className="bg-whiteSmoke max-md:pb-12 relative">
       <DashboardNarbar />
-      <div className="py-5 bg-red-400">{children}</div>
+
+      <div>{children}</div>
+
       {/* <DashboardFooter /> */}
       <NavFooter />
     </div>

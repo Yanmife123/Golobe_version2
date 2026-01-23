@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button } from "../shadcn-uI/button";
+import { Button } from "../shadcn-ul/button";
 
 interface Props {
   children: React.ReactNode;

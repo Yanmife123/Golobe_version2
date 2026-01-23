@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { BtnLink2 } from "../utility/button";
+import { BtnLink2 } from "../../../utility/button";
 const golobeSection = [
   {
     id: 1,

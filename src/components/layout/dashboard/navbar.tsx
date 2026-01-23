@@ -13,10 +13,10 @@ const NavbarItems = [
 
 export default function DashboardNarbar() {
   return (
-    <header className="bg-white py-4 shadow-md flex__center">
-      <nav className="boxShadow w-[95%] max-w-7xl">
+    <header className="bg-white md:py-2 shadow-md flex__center">
+      <nav className="boxShadow md:w-[90%] w-[95%] max-w-7xl">
         <div className="boxWidth flex justify-between items-center py-4">
-          <ul className="gap-3 md:flex hidden">
+          <ul className="gap-8 md:flex hidden">
             {NavbarItems.map((item) => (
               <li key={item.title}>
                 <Link href={item.href} className="flex items-center gap-2">
@@ -71,7 +71,7 @@ export default function DashboardNarbar() {
                         src={"/default-pic.jpg"}
                         alt="User Icon"
                         fill
-                        className="rounded-full"
+                        className="rounded-full object-cover"
                       />
                     </div>
                     <div className="text-primaryT max-md:hidden"> Profile</div>
