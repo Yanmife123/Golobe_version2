@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Heart } from "lucide-react";
+
 import Link from "next/link";
 
 const NavbarItems = [
@@ -12,13 +13,13 @@ const NavbarItems = [
 
 export default function DashboardNarbar() {
   return (
-    <header className="bg-white border-b border-amber-200 py-4 shadow-md flex__center">
-      <nav className="boxShadow border-1  w-[95%] max-w-7xl">
+    <header className="bg-white py-4 shadow-md flex__center">
+      <nav className="boxShadow w-[95%] max-w-7xl">
         <div className="boxWidth flex justify-between items-center py-4">
           <ul className="gap-3 md:flex hidden">
             {NavbarItems.map((item) => (
               <li key={item.title}>
-                <Link href={"/"} className="flex items-center gap-2">
+                <Link href={item.href} className="flex items-center gap-2">
                   <div>
                     <Image
                       src={item.src}
@@ -34,20 +35,30 @@ export default function DashboardNarbar() {
               </li>
             ))}
           </ul>
-          <div className="relative  w-[114px] h-[34px]">
-            <Image src={"/Logo.svg"} alt="Golobe Icon" fill />
-          </div>
+          <Link href={"/dashboard/flight"}>
+            <div className="relative  w-[114px] h-[34px]">
+              <Image src={"/Logo.svg"} alt="Golobe Icon" fill />
+            </div>
+          </Link>
           <div>
-            <ul className="flex gap-4 border-l border-amber-200 items-center">
+            <ul className="flex md:gap-4 gap-6 items-center">
               <li>
                 <Link
                   className="py-2 text-sm font-sans text-primaryT font-semibold"
                   href={"#"}
                 >
                   <div className="flex gap-1 items-center">
-                    <Heart size={18} className="text-primaryT" /> Favorites
+                    <Heart
+                      size={18}
+                      className=" text-primaryT"
+                      fill="#112211"
+                    />{" "}
+                    <span className="max-md:hidden">Favorites</span>
                   </div>
                 </Link>
+              </li>
+              <li>
+                <div className="h-[34px] w-[1px] bg-primaryT " />
               </li>
               <li>
                 <Link
@@ -63,7 +74,7 @@ export default function DashboardNarbar() {
                         className="rounded-full"
                       />
                     </div>
-                    <div className="text-primaryT"> Profile</div>
+                    <div className="text-primaryT max-md:hidden"> Profile</div>
                   </div>
                 </Link>
               </li>
