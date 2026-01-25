@@ -8,7 +8,7 @@ export function NavFooter() {
     { title: "Hostel", href: "/dashboard/hostel", src: "/hostel.svg" },
   ];
   return (
-    <footer className="md:hidden fixed bottom-0 left-0 right-0 bg-background border-t p-2  flex justify-around">
+    <footer className="md:hidden fixed bottom-0 left-0 right-0 bg-background border-t p-2 z-5  flex justify-around">
       {/* <button className="flex flex-col items-center text-sm">
         <Image src={"/plane.svg"} alt="Plane Icon" width={24} height={24} />
         <span>Flight</span>
