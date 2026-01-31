@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { DashboardHeader } from "@/components/UI/dashboard/DashboardSectionHeader";
 import Link from "next/link";
 
 const destinations = [
@@ -51,26 +51,23 @@ const destinations = [
 
 export function FeaturedDestinations() {
   return (
-    <section className="py-16 md:py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="pt-16 md:pt-24">
+      <div className=" ">
         {/* Section Header */}
-        <div className="flex justify-between items-start mb-8 md:mb-12 relative z-10">
-          <div>
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
-              Let's go places together
-            </h2>
-            <p className="text-muted-foreground text-sm md:text-base">
-              Discover the latest offers and news and start planning your next
-              trip with us.
-            </p>
-          </div>
-          <a
-            href="#"
-            className="text-primary hover:text-primary/80 transition-colors text-sm font-medium whitespace-nowrap ml-4"
-          >
-            See All
-          </a>
-        </div>
+        <DashboardHeader
+          title=" Let's go places together"
+          paragraph="Discover the latest offers and news and start planning your next
+              trip with us."
+          rightContent={
+            <a
+              href="#"
+              className="text-primary hover:text-primary/80 transition-colors text-sm font-medium whitespace-nowrap ml-4 border-1 border-secondaryT px-3 py-2 rounded-md flex items-center gap-1"
+            >
+              See All
+            </a>
+          }
+          className="mb-3"
+        />
 
         {/* World Map Section with Scattered Destinations */}
         <div className="relative w-full bg-gradient-to-br from-mintygreen/80 via-mintygreen/90 to-mintygreen/90 rounded-2xl overflow-hidden min-h-96 md:min-h-[500px]">

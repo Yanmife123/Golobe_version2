@@ -1,8 +1,9 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 export function NavFooter() {
   const pathname = usePathname();
+  const router = useRouter();
   const NavItemList = [
     { title: "Flight", href: "/dashboard/flight", src: "/plane.svg" },
     { title: "Hostel", href: "/dashboard/hostel", src: "/hostel.svg" },
@@ -20,6 +21,7 @@ export function NavFooter() {
       {NavItemList.map((item) => (
         <button
           key={item.title}
+          onClick={() => router.push(item.href)}
           className={`flex flex-col items-center px-4 py-2 text-sm ${pathname === item.href ? "border-t-2 border-secondaryT" : ""} `}
         >
           <Image
