@@ -17,7 +17,7 @@ import {
 import { Card, CardContent, CardTitle } from "@/components/shadcn-ul/card";
 // import { SelectContent, SelectValue } from "@radix-ui/react-select";
 // import { Button } from "@/components/shadcn-ul/button";
-export function HeroFlightForm() {
+export function HeroHostelForm() {
   return (
     <div className="z-2 relative flex__center md:mt-18">
       <Card className="px-5 bg-white text-primaryT w-full max-w-6xl space-y-5">
@@ -29,14 +29,14 @@ export function HeroFlightForm() {
                 <Field className="flex-2 relative">
                   <FieldLabel
                     className="search_label max-w-fit"
-                    htmlFor="fromTo"
+                    htmlFor="destination"
                   >
-                    From - To
+                    Enter Destination
                   </FieldLabel>
                   <Input
-                    placeholder="City or airport"
-                    name="fromTo"
-                    id="fromTo"
+                    placeholder="Istanbul, Turkey"
+                    name="destination"
+                    id="destination"
                     className="border-[#79747E] py-4 rounded-sm"
                   />
                 </Field>
@@ -96,7 +96,7 @@ export function HeroFlightForm() {
                   <FormBtn className="flex gap-2 items-center max-md:w-full">
                     <div>
                       <Image
-                        src={"/mail-plane.svg"}
+                        src={"/building.svg"}
                         alt="searchIcon"
                         width={16}
                         height={16}

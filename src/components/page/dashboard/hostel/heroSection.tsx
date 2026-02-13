@@ -1,5 +1,6 @@
 import { HeroSection } from "@/components/UI/dashboard/HeroSectionUI";
-import { HeroFlightForm } from "../flight/HeroFlightForm";
+import { HeroHostelForm } from "./HeroHostelForm";
+
 export function HeroSectionHostel() {
   return (
     <HeroSection
@@ -7,7 +8,7 @@ export function HeroSectionHostel() {
       title="Make your travel whishlist, we’ll do the rest"
       label="Special offers to suit your plan"
     >
-      <div></div>
+      <HeroHostelForm />
     </HeroSection>
   );
 }

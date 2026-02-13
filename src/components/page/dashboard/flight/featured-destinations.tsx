@@ -70,7 +70,7 @@ export function FeaturedDestinations() {
         />
 
         {/* World Map Section with Scattered Destinations */}
-        <div className="relative w-full bg-gradient-to-br from-mintygreen/80 via-mintygreen/90 to-mintygreen/90 rounded-2xl overflow-hidden min-h-96 md:min-h-[500px]">
+        <div className="relative w-full bg-gradient-to-br from-mintygreen/80 via-mintygreen/90 to-mintygreen/90 rounded-2xl overflow-hidden min-h-96 md:min-h-[500px] max-w-6xl mx-auto">
           {/* World Map Background Pattern */}
           <svg
             className="absolute inset-0 w-full h-full opacity-15"

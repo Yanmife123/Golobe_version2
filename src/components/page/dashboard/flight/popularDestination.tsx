@@ -12,7 +12,7 @@ export const destinations = [
     description: "An amazing journey",
     price: 700,
     image:
-      "https://res.cloudinary.com/duyhha3mz/image/upload/fall-1_pfmmet.jpgg",
+      "https://res.cloudinary.com/duyhha3mz/image/upload/fall-1_pfmmet.jpg",
   },
   {
     id: 2,

@@ -27,14 +27,6 @@ export function SearchFlightForm() {
             <label htmlFor="Trip" className="search_label">
               Trip
             </label>
-            <select
-              name="Trip"
-              id="Trip"
-              className="py-2 px-2 w-[90%] outline-none"
-            >
-              <option value="return">Return</option>
-              <option value="no-return">No-return</option>
-            </select>
           </div>
           <div className="relative flex-2 search_input_container">
             <label htmlFor="depart-return" className="search_label">
