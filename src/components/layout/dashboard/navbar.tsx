@@ -1,6 +1,7 @@
+"use client";
 import Image from "next/image";
 import { Heart } from "lucide-react";
-
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 const NavbarItems = [
@@ -12,13 +13,17 @@ const NavbarItems = [
 ];
 
 export default function DashboardNarbar() {
+  const pathname = usePathname();
   return (
     <header className="bg-white md:py-2 shadow-md flex__center">
       <nav className="boxShadow md:w-[90%] w-[95%] max-w-7xl">
         <div className="boxWidth flex justify-between items-center py-4">
           <ul className="gap-8 md:flex hidden">
             {NavbarItems.map((item) => (
-              <li key={item.title}>
+              <li key={item.title} className="relative">
+                <div
+                  className={`h-[5px] w-full bg-secondaryT absolute left-0  -bottom-[16px] md:-bottom-[36px] ${pathname.includes(item.href) ? "block" : "hidden"} `}
+                />
                 <Link href={item.href} className="flex items-center gap-2">
                   <div>
                     <Image

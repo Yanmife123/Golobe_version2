@@ -39,7 +39,7 @@ export function TravelHighlight() {
       <div className="mt-8 flex__center w-full">
         <div className="max-w-6xl w-full">
           <div className=" max-w-6xl grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="w-full md:h-95 h-64 bg-secondaryT rounded-[18px] p-6 flex flex-col justify-between">
+            <div className="w-full md:h-95 h-auto gap-7 bg-secondaryT rounded-[18px] p-6 flex flex-col justify-between">
               <div className="space-y-6">
                 <div className="flex justify-between items-center">
                   <div>

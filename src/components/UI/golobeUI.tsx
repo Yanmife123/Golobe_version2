@@ -18,7 +18,7 @@ export function CardContainer({
   className?: string;
 }) {
   return (
-    <div className={`${className} bg-white shadow-card rounded-[16px]`}>
+    <div className={` bg-white shadow-card rounded-[16px] ${className}`}>
       {children}
     </div>
   );

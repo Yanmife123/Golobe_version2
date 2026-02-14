@@ -10,7 +10,7 @@ export default function DashboardLayout({
     <div className="bg-whiteSmoke max-md:pb-12 relative">
       <DashboardNarbar />
 
-      <div className="overflow-y  border max-md:mb-6">{children}</div>
+      <div className="overflow-y max-md:mb-6">{children}</div>
 
       {/* <DashboardFooter /> */}
       <NavFooter />
