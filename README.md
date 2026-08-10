@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Golobe
 
-## Getting Started
+Golobe is a flight & hostel booking web app — search flights or hostels, drill
+into a detail page, and walk through a full booking flow (login → payment plan
+→ card → confirmation), with a profile/account area and booking history.
 
-First, run the development server:
+Built with Next.js (App Router), React, TypeScript, and Tailwind CSS.
+
+## Features
+
+- **Flights** — search, filterable results list, flight detail page, booking flow
+- **Hostels/Hotels** — search, filterable results (category tabs, amenities), hotel
+  detail page (gallery, rooms, reviews), booking flow
+- **Auth** — Google OAuth login/register (see [Backend](#backend) below for the
+  planned move to Supabase Auth, which adds Facebook and Apple login)
+- **Profile** — account settings, booking/ticket history
+
+## Tech stack
+
+- [Next.js](https://nextjs.org) 16 (App Router, Turbopack) + React 19 + TypeScript
+- Tailwind CSS v4, [shadcn/ui](https://ui.shadcn.com) components on top of Radix UI
+- [next-auth](https://next-auth.js.org) for authentication (currently JWT sessions, no DB)
+- `react-hook-form` for forms, `embla-carousel` / `swiper` / `motion` for carousels and animation
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Other scripts: `pnpm build`, `pnpm start`, `pnpm lint`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project structure
 
-## Learn More
+```
+src/app/(auth)/          login, register, forgotten password
+src/app/dashboard/flight/    flight results, detail, booking
+src/app/dashboard/hostel/    hostel results, detail, booking
+src/app/dashboard/profile/   account settings, booking history
+src/components/page/         page-specific components, grouped by feature
+src/components/layout/       shared layout (navbar, etc.)
+src/components/shadcn-ui/    shadcn/ui primitives
+src/static-data/             mock data standing in for the database for now
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Backend
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The app currently runs on static mock data (`src/static-data/*`) — nothing is
+wired up to a real database yet. The plan is Supabase (Postgres + Supabase Auth
+for Google/Facebook/Apple login) with Next.js route handlers on the server side.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See [`docs/database-schema.md`](./docs/database-schema.md) for the schema draft
+and open questions (ORM choice, room availability, reviews auth).
