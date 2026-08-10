@@ -68,7 +68,7 @@ export default function DashboardNarbar() {
               <li>
                 <Link
                   className="py-2 bg-primaryT text-white text-sm rounded-[8px] font-semibold"
-                  href={"#"}
+                  href={"/dashboard/profile"}
                 >
                   <div className="flex gap-1 items-center ">
                     <div className="relative w-[45px] h-[45px] rounded-full ">
