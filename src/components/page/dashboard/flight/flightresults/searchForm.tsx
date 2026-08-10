@@ -1,5 +1,6 @@
+"use client";
+import { useState } from "react";
 import { Input } from "@/components/shadcn-ul/input";
-import { FormBtn } from "@/components/utility/button";
 import Image from "next/image";
 import {
   Field,
@@ -7,57 +8,58 @@ import {
   FieldSet,
   FieldLabel,
 } from "@/components/shadcn-ul/field";
-// import {
-//   Select,
-//   SelectGroup,
-//   SelectItem,
-//   SelectTrigger,
-//   SelectLabel,
-// } from "@/components/shadcn-ul/select";
-import { Card, CardContent, CardTitle } from "@/components/shadcn-ul/card";
-// import { SelectContent, SelectValue } from "@radix-ui/react-select";
-// import { Button } from "@/components/shadcn-ul/button";
+import { Card, CardContent } from "@/components/shadcn-ul/card";
 import { Search } from "lucide-react";
 
 export function SearchForm() {
+  const [from, setFrom] = useState("Lahore");
+  const [to, setTo] = useState("Karachi");
+
+  function swapCities() {
+    setFrom(to);
+    setTo(from);
+  }
+
   return (
-    <Card className="px-5 bg-white text-primaryT w-full max-w-6xl space-y-5">
-      <CardTitle>Where are you flying?</CardTitle>
+    <Card className="p-4 pt-7 md:p-5 bg-white text-primaryT w-full max-w-6xl">
       <CardContent className="p-0">
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
           <FieldSet>
-            <FieldGroup className="flex md:gap-6 gap-7 md:flex-row flex-col items-center">
+            <FieldGroup className="flex md:gap-6 gap-7 md:flex-row flex-col md:items-end">
               <Field className="flex-2 relative">
                 <FieldLabel className="search_label max-w-fit" htmlFor="fromTo">
                   From - To
                 </FieldLabel>
-                <Input
-                  placeholder="City or airport"
-                  name="fromTo"
-                  id="fromTo"
-                  className="border-[#79747E] py-4 rounded-sm"
-                />
+                <div className="relative">
+                  <Input
+                    placeholder="City or airport"
+                    name="fromTo"
+                    id="fromTo"
+                    value={`${from} - ${to}`}
+                    readOnly
+                    className="border-[#79747E] py-4 pr-10 rounded-sm cursor-default"
+                  />
+                  <button
+                    type="button"
+                    onClick={swapCities}
+                    aria-label="Swap from and to"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer"
+                  >
+                    <Image
+                      src="/ion_swap-horizontal.svg"
+                      alt=""
+                      width={18}
+                      height={18}
+                    />
+                  </button>
+                </div>
               </Field>
               <Field className="flex-1 relative">
                 <FieldLabel className="search_label max-w-fit">Trip</FieldLabel>
-                {/* <Select>
-                    <SelectTrigger className="border border-[#79747E] py-3 rounded-sm">
-                      <SelectValue placeholder="Select trip" />
-                    </SelectTrigger>
-
-                    <SelectContent className="bg-whiteSmoke text-primaryT shadow-2xs max-w-48 z-30 p-4 rounded-lg">
-                      <SelectGroup>
-                        <SelectLabel>Trip</SelectLabel>
-                        <SelectItem value="return">Return</SelectItem>
-                        <SelectItem value="noReturn">No Return</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select> */}
                 <select
                   name="Trip"
                   id="Trip"
-                  className="py-2 px-2 w-[90%] outline-none border border-[#79747E] rounded-sm   focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
-                  // placeholder="Select trip"
+                  className="py-2 px-2 w-full h-[38px] outline-none border border-[#79747E] rounded-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
                 >
                   <option value="return">Return</option>
                   <option value="no-return">No-return</option>
@@ -77,22 +79,17 @@ export function SearchForm() {
                   Passenger - Class
                 </FieldLabel>
                 <Input
-                  placeholder="1 Passenger, Economyt"
+                  placeholder="1 Passenger, Economy"
                   className="border-[#79747E] py-2 rounded-sm"
                 />
               </Field>
-              <div className="flex gap-6 justify-end flex-row">
-                {/* <div>
-                    <Button>
-
-                    </Button>
-                </div> */}
-                <div className="">
-                  <FormBtn className="flex gap-2 items-center rounded-sm ">
-                    <Search size={20} />
-                  </FormBtn>
-                </div>
-              </div>
+              <button
+                type="submit"
+                aria-label="Search flights"
+                className="h-[38px] md:w-[38px] w-full shrink-0 rounded-sm bg-secondaryT text-primaryT flex__center hover:bg-mintygreen transition-colors cursor-pointer"
+              >
+                <Search size={18} />
+              </button>
             </FieldGroup>
           </FieldSet>
         </form>

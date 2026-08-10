@@ -10,13 +10,12 @@ interface Props {
 export function FormBtn({
   children,
   className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
+  ...props
+}: React.ComponentProps<typeof Button>) {
   return (
     <Button
       className={`w-full h-auto py-3 bg-secondaryT text-primaryT font-sans font-semibold hover:bg-mintygreen ${className} cursor-pointer`}
+      {...props}
     >
       {children}
     </Button>
