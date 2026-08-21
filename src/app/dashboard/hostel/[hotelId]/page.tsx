@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { HotelDetailWrapper } from "@/components/page/dashboard/hostel/hosteldetail/hotelDetailWrapper";
-import { getHotel } from "@/static-data/hotelData";
+import { getHotel } from "@/lib/supabase/hotels";
+import { PageTransition } from "@/components/utility/pageTransition";
 
 export default async function HotelDetailPage({
   params,
@@ -8,13 +9,13 @@ export default async function HotelDetailPage({
   params: Promise<{ hotelId: string }>;
 }) {
   const { hotelId } = await params;
-  const hotel = getHotel(hotelId);
+  const hotel = await getHotel(hotelId);
 
   if (!hotel) notFound();
 
   return (
-    <div className="py-6">
+    <PageTransition className="py-6">
       <HotelDetailWrapper hotel={hotel} />
-    </div>
+    </PageTransition>
   );
 }

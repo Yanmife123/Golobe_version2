@@ -1,7 +1,8 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { BookingWrapper } from "@/components/page/dashboard/hostel/booking/bookingWrapper";
-import { getHotel } from "@/static-data/hotelData";
+import { getHotel } from "@/lib/supabase/hotels";
+import { PageTransition } from "@/components/utility/pageTransition";
 
 export default async function HotelBookingPage({
   params,
@@ -9,15 +10,15 @@ export default async function HotelBookingPage({
   params: Promise<{ hotelId: string }>;
 }) {
   const { hotelId } = await params;
-  const hotel = getHotel(hotelId);
+  const hotel = await getHotel(hotelId);
 
   if (!hotel) notFound();
 
   return (
-    <div className="py-6">
+    <PageTransition className="py-6">
       <Suspense>
         <BookingWrapper hotel={hotel} />
       </Suspense>
-    </div>
+    </PageTransition>
   );
 }

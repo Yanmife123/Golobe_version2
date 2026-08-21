@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { FlightDetailWrapper } from "@/components/page/dashboard/flight/flightdetail/flightDetailWrapper";
-import { getFlightDetail } from "@/static-data/flightDetailData";
+import { getFlightDetail } from "@/lib/supabase/flights";
+import { PageTransition } from "@/components/utility/pageTransition";
 
 export default async function FlightDetailPage({
   params,
@@ -8,13 +9,13 @@ export default async function FlightDetailPage({
   params: Promise<{ flightId: string }>;
 }) {
   const { flightId } = await params;
-  const flight = getFlightDetail(flightId);
+  const flight = await getFlightDetail(flightId);
 
   if (!flight) notFound();
 
   return (
-    <div className="py-6">
+    <PageTransition className="py-6">
       <FlightDetailWrapper flight={flight} />
-    </div>
+    </PageTransition>
   );
 }

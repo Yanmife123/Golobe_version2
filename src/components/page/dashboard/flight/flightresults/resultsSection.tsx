@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { FilterSidebar } from "./filterSidebar";
 import { FlightList } from "./flightList";
 import ResultHeader from "./resultHeader";
-import { mockDeals } from "@/static-data/flightData";
+import { FlightDeal } from "@/static-data/flightData";
 import {
   FilterState,
   SortOption,
@@ -12,12 +12,24 @@ import {
   parseDurationToMinutes,
 } from "./flightFilterUtils";
 
-export function SearchResultSection() {
+export function SearchResultSection({
+  deals,
+  fromCode,
+  toCode,
+}: {
+  deals: FlightDeal[];
+  fromCode: string | null;
+  toCode: string | null;
+}) {
   const [filters, setFilters] = useState<FilterState>(defaultFilters);
   const [sort, setSort] = useState<SortOption>("recommended");
 
   const filteredDeals = useMemo(() => {
-    return mockDeals.filter((deal) => {
+    return deals.filter((deal) => {
+      const [departCode, arriveCode] = deal.route.split(" - ");
+      if (fromCode && departCode !== fromCode) return false;
+      if (toCode && arriveCode !== toCode) return false;
+
       if (
         deal.price < filters.priceRange[0] ||
         deal.price > filters.priceRange[1]
@@ -41,7 +53,7 @@ export function SearchResultSection() {
 
       return true;
     });
-  }, [filters]);
+  }, [deals, filters, fromCode, toCode]);
 
   const sortedDeals = useMemo(() => {
     const list = [...filteredDeals];
@@ -70,7 +82,7 @@ export function SearchResultSection() {
       <div className="w-full max-w-6xl flex gap-6">
         <aside className="hidden lg:block w-80 flex-shrink-0">
           <div className="sticky top-24">
-            <FilterSidebar filters={filters} onChange={setFilters} />
+            <FilterSidebar deals={deals} filters={filters} onChange={setFilters} />
           </div>
         </aside>
         <main className="flex-1 min-w-0 sm:border-l-1 sm:border-primaryT/20 sm:px-5 space-y-6">
@@ -79,7 +91,7 @@ export function SearchResultSection() {
             sort={sort}
             onSortChange={setSort}
             shownCount={sortedDeals.length}
-            totalCount={mockDeals.length}
+            totalCount={deals.length}
           />
           <FlightList deals={sortedDeals} />
         </main>

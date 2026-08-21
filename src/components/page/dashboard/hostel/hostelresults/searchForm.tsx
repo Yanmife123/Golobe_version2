@@ -1,12 +1,11 @@
 "use client";
-import { Input } from "@/components/shadcn-ul/input";
 import {
   Field,
   FieldGroup,
   FieldSet,
   FieldLabel,
 } from "@/components/shadcn-ul/field";
-import { Card, CardContent } from "@/components/shadcn-ul/card";
+import { Card, CardContent, CardTitle } from "@/components/shadcn-ul/card";
 import {
   Select,
   SelectContent,
@@ -14,58 +13,87 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/shadcn-ul/select";
-import { Search, CalendarDays } from "lucide-react";
+import { Search } from "lucide-react";
+import { ALL_DESTINATIONS } from "./hostelFilterUtils";
+import { CheckDatePicker } from "./checkDatePicker";
 
 interface SearchFormProps {
   destination: string;
   onDestinationChange: (value: string) => void;
+  destinationOptions: string[];
   guests: string;
   onGuestsChange: (value: string) => void;
+  checkIn: Date | null;
+  checkOut: Date | null;
+  onCheckInChange: (date: Date) => void;
+  onCheckOutChange: (date: Date) => void;
+  onSubmit?: () => void;
+  title?: string;
 }
 
 export function SearchForm({
   destination,
   onDestinationChange,
+  destinationOptions,
   guests,
   onGuestsChange,
+  checkIn,
+  checkOut,
+  onCheckInChange,
+  onCheckOutChange,
+  onSubmit,
+  title,
 }: SearchFormProps) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
   return (
-    <Card className="p-4 pt-7 md:p-5 bg-white text-primaryT w-full max-w-6xl">
+    <Card className="p-4 pt-7 md:p-5 bg-white text-primaryT w-full max-w-6xl gap-4">
+      {title && <CardTitle>{title}</CardTitle>}
       <CardContent className="p-0">
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            onSubmit?.();
+          }}
+        >
           <FieldSet>
             <FieldGroup className="flex md:gap-6 gap-7 md:flex-row flex-col md:items-end">
               <Field className="flex-2 relative">
                 <FieldLabel className="search_label max-w-fit" htmlFor="destination">
                   Enter Destination
                 </FieldLabel>
-                <Input
-                  id="destination"
-                  placeholder="City or hotel name"
-                  value={destination}
-                  onChange={(e) => onDestinationChange(e.target.value)}
-                  className="border-[#79747E] py-2 rounded-sm"
-                />
+                <Select value={destination} onValueChange={onDestinationChange}>
+                  <SelectTrigger id="destination" className="w-full border-[#79747E] py-2 h-auto">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value={ALL_DESTINATIONS}>{ALL_DESTINATIONS}</SelectItem>
+                    {destinationOptions.map((d) => (
+                      <SelectItem key={d} value={d}>
+                        {d}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </Field>
               <Field className="flex-1 relative">
                 <FieldLabel className="search_label max-w-fit">Check In</FieldLabel>
-                <div className="relative">
-                  <Input
-                    defaultValue="Fri 12/2"
-                    className="border-[#79747E] py-2 pr-9 rounded-sm"
-                  />
-                  <CalendarDays className="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-grey pointer-events-none" />
-                </div>
+                <CheckDatePicker
+                  date={checkIn}
+                  onChange={onCheckInChange}
+                  minDate={today}
+                  placeholder="Select date"
+                />
               </Field>
               <Field className="flex-1 relative">
                 <FieldLabel className="search_label max-w-fit">Check Out</FieldLabel>
-                <div className="relative">
-                  <Input
-                    defaultValue="Sun 12/4"
-                    className="border-[#79747E] py-2 pr-9 rounded-sm"
-                  />
-                  <CalendarDays className="w-4 h-4 absolute right-3 top-1/2 -translate-y-1/2 text-grey pointer-events-none" />
-                </div>
+                <CheckDatePicker
+                  date={checkOut}
+                  onChange={onCheckOutChange}
+                  minDate={checkIn ?? today}
+                  placeholder="Select date"
+                />
               </Field>
               <Field className="flex-1 relative">
                 <FieldLabel className="search_label max-w-fit">

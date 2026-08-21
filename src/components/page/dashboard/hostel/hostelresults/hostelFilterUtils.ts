@@ -1,4 +1,4 @@
-import { HotelCategory } from "@/static-data/hotelData";
+import { Hotel, HotelCategory } from "@/static-data/hotelData";
 
 export interface FilterState {
   priceRange: [number, number];
@@ -20,3 +20,9 @@ export const defaultFilters: FilterState = {
 };
 
 export const categoryOrder: HotelCategory[] = ["Hotels", "Motels", "Resorts"];
+
+export const ALL_DESTINATIONS = "All destinations";
+
+export function getDestinationOptions(hotels: Hotel[]): string[] {
+  return Array.from(new Set(hotels.map((h) => `${h.city}, ${h.country}`))).sort();
+}
