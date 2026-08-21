@@ -2,7 +2,7 @@
 import { Checkbox } from "@/components/shadcn-ul/checkbox";
 import { Slider } from "@/components/shadcn-ul/slider";
 import { Card } from "@/components/shadcn-ul/card";
-import { mockDeals } from "@/static-data/flightData";
+import { FlightDeal } from "@/static-data/flightData";
 import {
   FilterState,
   PRICE_MIN,
@@ -13,14 +13,16 @@ import {
 } from "./flightFilterUtils";
 
 const ratingOptions = [0, 1, 2, 3, 4];
-const airlineOptions = Array.from(new Set(mockDeals.map((d) => d.airline)));
 
 interface FilterSidebarProps {
+  deals: FlightDeal[];
   filters: FilterState;
   onChange: (filters: FilterState) => void;
 }
 
-export function FilterSidebar({ filters, onChange }: FilterSidebarProps) {
+export function FilterSidebar({ deals, filters, onChange }: FilterSidebarProps) {
+  const airlineOptions = Array.from(new Set(deals.map((d) => d.airline)));
+
   function toggleAirline(airline: string) {
     const airlines = filters.airlines.includes(airline)
       ? filters.airlines.filter((a) => a !== airline)

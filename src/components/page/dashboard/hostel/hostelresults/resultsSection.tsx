@@ -5,15 +5,33 @@ import { HotelList } from "./hostelList";
 import ResultHeader from "./hostelHeader";
 import { CategoryTabs } from "./categoryTabs";
 import { SearchForm } from "./searchForm";
-import { hotels, HotelCategory } from "@/static-data/hotelData";
-import { FilterState, SortOption, defaultFilters } from "./hostelFilterUtils";
+import { Hotel, HotelCategory } from "@/static-data/hotelData";
+import {
+  ALL_DESTINATIONS,
+  FilterState,
+  SortOption,
+  defaultFilters,
+  getDestinationOptions,
+} from "./hostelFilterUtils";
 
-export function SearchResultSection() {
-  const [destination, setDestination] = useState("Istanbul, Turkey");
-  const [guests, setGuests] = useState("1 room, 2 guests");
+export function SearchResultSection({
+  hotels,
+  initialDestination = ALL_DESTINATIONS,
+  initialGuests = "1 room, 2 guests",
+}: {
+  hotels: Hotel[];
+  initialDestination?: string;
+  initialGuests?: string;
+}) {
+  const [destination, setDestination] = useState(initialDestination);
+  const [guests, setGuests] = useState(initialGuests);
+  const [checkIn, setCheckIn] = useState<Date | null>(null);
+  const [checkOut, setCheckOut] = useState<Date | null>(null);
   const [category, setCategory] = useState<HotelCategory>("Hotels");
   const [filters, setFilters] = useState<FilterState>(defaultFilters);
   const [sort, setSort] = useState<SortOption>("recommended");
+
+  const destinationOptions = useMemo(() => getDestinationOptions(hotels), [hotels]);
 
   const counts = useMemo(() => {
     const base: Record<HotelCategory, number> = {
@@ -25,12 +43,12 @@ export function SearchResultSection() {
       base[h.category] += 1;
     });
     return base;
-  }, []);
+  }, [hotels]);
 
   const filteredHotels = useMemo(() => {
     const normalize = (s: string) =>
       s.toLowerCase().replace(/,/g, "").replace(/\s+/g, " ").trim();
-    const query = normalize(destination);
+    const query = destination === ALL_DESTINATIONS ? "" : normalize(destination);
     return hotels.filter((hotel) => {
       if (hotel.category !== category) return false;
 
@@ -64,7 +82,7 @@ export function SearchResultSection() {
 
       return true;
     });
-  }, [category, filters, destination]);
+  }, [hotels, category, filters, destination]);
 
   const sortedHotels = useMemo(() => {
     const list = [...filteredHotels];
@@ -85,8 +103,13 @@ export function SearchResultSection() {
       <SearchForm
         destination={destination}
         onDestinationChange={setDestination}
+        destinationOptions={destinationOptions}
         guests={guests}
         onGuestsChange={setGuests}
+        checkIn={checkIn}
+        checkOut={checkOut}
+        onCheckInChange={setCheckIn}
+        onCheckOutChange={setCheckOut}
       />
 
       <div className="w-full flex__center">

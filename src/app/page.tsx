@@ -13,12 +13,13 @@ import {
   SearchStayForm,
 } from "@/components/page/landingpage/searchForm/searchForm";
 import Image from "next/image";
+import { PageTransition } from "@/components/utility/pageTransition";
 
 export default function Home() {
   const [searchNavClicked, setSearchNavClicked] = useState<boolean>(false);
   return (
     <main className="flex__center ">
-      <div className="boxWidth">
+      <PageTransition className="boxWidth">
         <div className="md:px-9 md:py-7 px-2 py-2 h-auto">
           <section className="relative md:h-[600px] h-[300px]">
             <div className="h-full w-full absolute top-0 left-0 md:rounded-[24px] rounded-[0] overflow-hidden">
@@ -100,7 +101,7 @@ export default function Home() {
           <Review />
         </div>
         <Footer />
-      </div>
+      </PageTransition>
     </main>
   );
 }
