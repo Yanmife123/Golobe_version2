@@ -20,6 +20,7 @@ export default function ImageSlider({ className }: { className?: string }) {
           src={src}
           alt={`slider ${index}`}
           fill={true}
+          sizes="(max-width: 1024px) 350px, 460px"
           className="object-cover rounded-[30px]"
           priority
         />

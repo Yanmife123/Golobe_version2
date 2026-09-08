@@ -11,7 +11,14 @@ export function Gallery({ images, name }: { images: string[]; name: string }) {
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div className="relative w-full h-[300px] md:h-[420px] rounded-xl overflow-hidden">
-          <Image src={big} alt={name} fill className="object-cover" priority />
+          <Image
+            src={big}
+            alt={name}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover"
+            priority
+          />
         </div>
         <div className="grid grid-cols-2 gap-3">
           {thumbs.slice(0, 4).map((src, i) => {
@@ -23,7 +30,13 @@ export function Gallery({ images, name }: { images: string[]; name: string }) {
                 onClick={() => setOpen(true)}
                 className="relative w-full h-[145px] md:h-[203px] rounded-xl overflow-hidden cursor-pointer"
               >
-                <Image src={src} alt={name} fill className="object-cover" />
+                <Image
+                  src={src}
+                  alt={name}
+                  fill
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  className="object-cover"
+                />
                 {isLast && (
                   <span className="absolute bottom-3 right-3 bg-secondaryT text-primaryT text-sm font-semibold px-3 py-1.5 rounded-md">
                     View all photos
@@ -46,7 +59,13 @@ export function Gallery({ images, name }: { images: string[]; name: string }) {
                 key={src}
                 className="relative w-full h-40 rounded-lg overflow-hidden"
               >
-                <Image src={src} alt={name} fill className="object-cover" />
+                <Image
+                  src={src}
+                  alt={name}
+                  fill
+                  sizes="(max-width: 768px) 50vw, 33vw"
+                  className="object-cover"
+                />
               </div>
             ))}
           </div>

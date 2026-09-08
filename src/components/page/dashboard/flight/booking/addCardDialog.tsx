@@ -16,7 +16,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/shadcn-ul/select";
-import { SavedCard } from "./cardListStep";
+import { addPaymentMethodAction } from "@/lib/supabase/bookings";
+import { PaymentMethod } from "./cardListStep";
+
+function detectBrand(digits: string): string {
+  if (/^4/.test(digits)) return "Visa";
+  if (/^(5[1-5]|2[2-7])/.test(digits)) return "Mastercard";
+  if (/^3[47]/.test(digits)) return "Amex";
+  if (/^6(011|5)/.test(digits)) return "Discover";
+  return "Card";
+}
 
 export function AddCardDialog({
   open,
@@ -25,7 +34,7 @@ export function AddCardDialog({
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onAdd: (card: SavedCard) => void;
+  onAdd: (card: PaymentMethod) => void;
 }) {
   const [cardNumber, setCardNumber] = useState("");
   const [expDate, setExpDate] = useState("");
@@ -34,6 +43,7 @@ export function AddCardDialog({
   const [country, setCountry] = useState("United States");
   const [saveInfo, setSaveInfo] = useState(true);
   const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   function reset() {
     setCardNumber("");
@@ -43,18 +53,44 @@ export function AddCardDialog({
     setError("");
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const digits = cardNumber.replace(/\s/g, "");
-    if (digits.length < 12 || !expDate || !cvc || !name.trim()) {
+    const expMatch = /^(\d{2})\/(\d{2})$/.exec(expDate.trim());
+
+    if (digits.length < 12 || !/^\d+$/.test(digits) || !expMatch || cvc.length < 3 || !name.trim()) {
       setError("Please fill in every field with valid card details.");
       return;
     }
-    onAdd({
-      id: crypto.randomUUID(),
-      last4: digits.slice(-4),
-      exp: expDate,
-    });
+
+    const expMonth = Number(expMatch[1]);
+    const expYear = 2000 + Number(expMatch[2]);
+    if (expMonth < 1 || expMonth > 12) {
+      setError("Enter a valid expiry date (MM/YY).");
+      return;
+    }
+
+    setSubmitting(true);
+    setError("");
+
+    // Only display data leaves the browser — the full number/CVC are used
+    // here to derive brand + last 4 digits, then discarded.
+    const result = await addPaymentMethodAction(
+      detectBrand(digits),
+      digits.slice(-4),
+      expMonth,
+      expYear,
+      name.trim()
+    );
+
+    setSubmitting(false);
+
+    if ("error" in result) {
+      setError(result.error);
+      return;
+    }
+
+    onAdd(result.card);
     reset();
     onOpenChange(false);
   }
@@ -71,6 +107,10 @@ export function AddCardDialog({
         <DialogHeader>
           <DialogTitle className="text-2xl">Add a new Card</DialogTitle>
         </DialogHeader>
+        <p className="text-xs text-secondaryT bg-secondaryLight/20 rounded-md px-3 py-2 -mt-2">
+          This is a demo — no real payment is processed. Enter any details;
+          they don&apos;t need to be a real card.
+        </p>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="search_label max-w-fit relative text-xs">
@@ -79,7 +119,7 @@ export function AddCardDialog({
             <Input
               value={cardNumber}
               onChange={(e) => setCardNumber(e.target.value)}
-              placeholder="4321 4321 4321 4321"
+              placeholder="4242 4242 4242 4242"
               className="border-[#79747E] rounded-sm"
             />
           </div>
@@ -145,11 +185,14 @@ export function AddCardDialog({
 
           {error && <p className="text-destructive text-sm">{error}</p>}
 
-          <FormBtn type="submit">Add Card</FormBtn>
+          <FormBtn type="submit" disabled={submitting}>
+            {submitting ? "Adding..." : "Add Card"}
+          </FormBtn>
 
           <p className="text-xs text-grey text-center">
-            By confirming, you allow us to charge your card for this payment
-            and future payments in accordance with our terms.
+            No card network is contacted and nothing is ever charged. We only
+            store the brand, last 4 digits, and expiry you enter here — never
+            the full number or CVC.
           </p>
         </form>
       </DialogContent>

@@ -9,7 +9,7 @@ export function AirlineLogo({
 }) {
   return (
     <span
-      className={`font-trade font-semibold leading-none whitespace-nowrap ${
+      className={`font-trade font-semibold leading-tight ${
         size === "lg" ? "text-2xl" : "text-sm"
       }`}
       style={{ color: brandColor }}

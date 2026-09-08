@@ -48,35 +48,28 @@ export function FlightCard({ deal }: { deal: FlightDeal }) {
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow border border-gray-200 py-0">
       <div className="p-6  border-b border-gray-200">
-        <div className="flex items-center justify-between  gap-4">
-          <div className="flex sm:items-center items-start gap-4 sm:flex-row flex-col">
-            <div className="w-[110px] h-auto relative flex-shrink-0 flex items-center">
-              <AirlineLogo
-                airline={deal.airline}
-                brandColor={deal.brandColor}
-              />
-            </div>
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex flex-col gap-2 min-w-0">
+            <AirlineLogo airline={deal.airline} brandColor={deal.brandColor} />
 
-            <div className="flex flex-col gap-2">
-              <div className="flex items-center gap-2">
-                <div className="px-2 py-1 bg-gray-100 rounded">
-                  <span className="text-sm font-semibold">{deal.rating}</span>
-                </div>
-                <div>
-                  <p className="text-sm font-semibold">{deal.ratingLabel}</p>
-                  <p className="text-xs text-gray-500">
-                    {deal.reviews} reviews
-                  </p>
-                </div>
+            <div className="flex items-center gap-2">
+              <div className="px-2 py-1 bg-gray-100 rounded flex-shrink-0">
+                <span className="text-sm font-semibold">{deal.rating}</span>
               </div>
-
-              <Badge className={`${deal.badgeColor} w-fit`} variant="secondary">
-                {deal.badge}
-              </Badge>
+              <div>
+                <p className="text-sm font-semibold">{deal.ratingLabel}</p>
+                <p className="text-xs text-gray-500">
+                  {deal.reviews} reviews
+                </p>
+              </div>
             </div>
+
+            <Badge className={`${deal.badgeColor} w-fit`} variant="secondary">
+              {deal.badge}
+            </Badge>
           </div>
 
-          <div className="text-right">
+          <div className="text-right flex-shrink-0">
             <p className="text-xs text-gray-500">starting from</p>
             <p className="text-3xl font-bold text-salmon">${deal.price}</p>
             {deal.originalPrice > deal.price && (

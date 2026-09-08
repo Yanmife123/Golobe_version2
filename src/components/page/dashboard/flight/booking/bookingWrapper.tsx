@@ -5,25 +5,67 @@ import { FlightBreadcrumb } from "../shared/flightBreadcrumb";
 import { PriceSidebar } from "../shared/priceSidebar";
 import { SegmentCard } from "../flightdetail/segmentCard";
 import { PaymentPlanSelector, PayPlan } from "./paymentPlanSelector";
-import { LoginStep } from "./loginStep";
-import { CardListStep, SavedCard } from "./cardListStep";
+import { CardListStep, PaymentMethod } from "./cardListStep";
 import { AddCardDialog } from "./addCardDialog";
 import { ConfirmationStep } from "./confirmationStep";
 import { FlightDetail } from "@/static-data/flightDetailData";
+import {
+  createFlightBookingAction,
+  type FlightBooking,
+} from "@/lib/supabase/bookings";
 
-type Step = "login" | "payment" | "confirmation";
+const FARE_CLASS = "Economy";
 
-export function BookingWrapper({ flight }: { flight: FlightDetail }) {
-  const [step, setStep] = useState<Step>("login");
+export function BookingWrapper({
+  flight,
+  paymentMethods,
+  passengerName,
+}: {
+  flight: FlightDetail;
+  paymentMethods: PaymentMethod[];
+  passengerName: string;
+}) {
   const [payPlan, setPayPlan] = useState<PayPlan>("full");
-  const [cards, setCards] = useState<SavedCard[]>([
-    { id: "seed", last4: "4321", exp: "02/27" },
-  ]);
-  const [selectedCardId, setSelectedCardId] = useState<string | null>("seed");
+  const [cards, setCards] = useState<PaymentMethod[]>(paymentMethods);
+  const [selectedCardId, setSelectedCardId] = useState<string | null>(
+    paymentMethods[0]?.id ?? null
+  );
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [confirming, setConfirming] = useState(false);
+  const [bookingError, setBookingError] = useState<string | null>(null);
+  const [booking, setBooking] = useState<FlightBooking | null>(null);
 
-  if (step === "confirmation") {
-    return <ConfirmationStep flight={flight} />;
+  if (booking) {
+    return (
+      <ConfirmationStep
+        flight={flight}
+        booking={booking}
+        passengerName={passengerName}
+        fareClass={FARE_CLASS}
+      />
+    );
+  }
+
+  async function handleConfirm() {
+    if (!selectedCardId) return;
+    setConfirming(true);
+    setBookingError(null);
+
+    const result = await createFlightBookingAction(
+      flight.id,
+      payPlan,
+      flight.priceBreakdown,
+      FARE_CLASS
+    );
+
+    setConfirming(false);
+
+    if ("error" in result) {
+      setBookingError(result.error);
+      return;
+    }
+
+    setBooking(result.booking);
   }
 
   return (
@@ -59,24 +101,30 @@ export function BookingWrapper({ flight }: { flight: FlightDetail }) {
               total={flight.price}
             />
 
-            {step === "login" ? (
-              <LoginStep onContinue={() => setStep("payment")} />
-            ) : (
-              <>
-                <CardListStep
-                  cards={cards}
-                  selectedCardId={selectedCardId}
-                  onSelectCard={setSelectedCardId}
-                  onAddCardClick={() => setDialogOpen(true)}
-                />
-                <FormBtn
-                  disabled={!selectedCardId}
-                  onClick={() => setStep("confirmation")}
-                >
-                  Confirm &amp; Pay ${flight.price}
-                </FormBtn>
-              </>
+            <CardListStep
+              cards={cards}
+              selectedCardId={selectedCardId}
+              onSelectCard={setSelectedCardId}
+              onAddCardClick={() => setDialogOpen(true)}
+            />
+
+            {bookingError && (
+              <p className="text-destructive text-sm" role="alert">
+                {bookingError}
+              </p>
             )}
+
+            <p className="text-xs text-grey text-center">
+              Demo checkout — no real payment is taken, no card network is
+              contacted.
+            </p>
+
+            <FormBtn
+              disabled={!selectedCardId || confirming}
+              onClick={handleConfirm}
+            >
+              {confirming ? "Confirming..." : `Confirm & Pay $${flight.price}`}
+            </FormBtn>
           </div>
 
           <div>

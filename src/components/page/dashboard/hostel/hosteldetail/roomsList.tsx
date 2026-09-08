@@ -18,7 +18,7 @@ export function RoomsList({
           className="flex items-center gap-4 py-4 flex-wrap sm:flex-nowrap"
         >
           <div className="relative w-14 h-12 rounded-md overflow-hidden flex-shrink-0">
-            <Image src={room.image} alt={room.name} fill className="object-cover" />
+            <Image src={room.image} alt={room.name} fill sizes="56px" className="object-cover" />
           </div>
           <p className="flex-1 text-sm min-w-[200px]">{room.name}</p>
           <p className="font-semibold">

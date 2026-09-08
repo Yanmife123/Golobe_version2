@@ -29,7 +29,7 @@ export function GolobeSection() {
                   src={data.src}
                   alt={data.title}
                   fill={true}
-                  // sizes="(max-width: 768px) 90vw, 448px"
+                  sizes="(max-width: 768px) 90vw, 448px"
                 />
               </div>
               <div className="absolute z-[1] top-0 left-0 h-full w-full default_hero_shadow_reverse rounded-[20px]" />

@@ -27,6 +27,7 @@ export default function Home() {
                 src={"/hero-Image.jpg"}
                 alt="Hero Image"
                 fill={true}
+                sizes="100vw"
                 className=" md:rounded-[24px] rounded-[0] z-[-1]"
                 priority={true}
               />
@@ -65,6 +66,7 @@ export default function Home() {
                           src={"/plane.svg"}
                           alt="flight Icon"
                           fill={true}
+                          sizes="24px"
                         />
                       </div>
                       <div className="text-primaryT font-semibold font-sans">
@@ -84,6 +86,7 @@ export default function Home() {
                           src={"/hostel.svg"}
                           alt="flight Icon"
                           fill={true}
+                          sizes="24px"
                         />
                       </div>
                       <div className="text-primaryT font-semibold font-sans">

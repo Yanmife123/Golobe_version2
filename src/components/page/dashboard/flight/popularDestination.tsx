@@ -71,6 +71,7 @@ export function PopularDestination() {
                   alt={destination.city}
                   className="w-full h-full object-cover"
                   fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 text-white">
                   <div className="flex justify-between items-center">

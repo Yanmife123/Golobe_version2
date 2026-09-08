@@ -25,7 +25,7 @@ export function StayPriceSidebar({
     <Card className="p-5 gap-4 sticky top-24">
       <div className="flex items-center gap-3">
         <div className="relative w-14 h-14 rounded-md overflow-hidden flex-shrink-0">
-          <Image src={hotel.images[0]} alt={hotel.name} fill className="object-cover" />
+          <Image src={hotel.images[0]} alt={hotel.name} fill sizes="56px" className="object-cover" />
         </div>
         <div>
           <p className="text-xs text-grey">
