@@ -95,6 +95,7 @@ export function FlightDetailWrapper({ flight }: { flight: FlightDetail }) {
             src={activeImage}
             alt={flight.title}
             fill
+            sizes="(max-width: 1024px) 100vw, 900px"
             className="object-cover"
             priority
           />
@@ -139,7 +140,7 @@ export function FlightDetailWrapper({ flight }: { flight: FlightDetail }) {
                     activeImage === src ? "ring-2 ring-secondaryT" : ""
                   }`}
                 >
-                  <Image src={src} alt="" fill className="object-cover" />
+                  <Image src={src} alt="" fill sizes="80px" className="object-cover" />
                 </button>
               ))}
             </div>

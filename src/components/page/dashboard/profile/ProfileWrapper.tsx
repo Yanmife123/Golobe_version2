@@ -2,21 +2,31 @@
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { signOutAction } from "@/lib/supabase/auth-actions";
+
 export default function ProfileWrapper({
   children,
+  name,
+  email,
+  profileImageUrl,
+  coverImageUrl,
 }: {
   children: React.ReactNode;
+  name: string;
+  email: string;
+  profileImageUrl: string | null;
+  coverImageUrl: string | null;
 }) {
   const pathname = usePathname();
-  console.log(pathname);
   return (
     <div>
       <div className="relative h-[320px] md:h-[360px] lg:h-[390px]">
         <div className="relative w-full lg:h-[350px] md:h-[300px] h-[200px]">
           <Image
-            src={"/Default-Cover.jpg"}
+            src={coverImageUrl || "/Default-Cover.jpg"}
             alt="Cover image"
             fill
+            sizes="100vw"
             className="object-cover rounded-2xl"
           />
           <div className="absolute sm:bottom-4 top-4 md:right-12 right-6">
@@ -43,9 +53,10 @@ export default function ProfileWrapper({
         <div className="flex flex-col gap-4 items-center absolute lg:-bottom-22 md:-bottom-18 -bottom-10 left-0 w-full">
           <div className="relative w-[160px] h-[160px] overflow-hidden">
             <Image
-              src={"/default-pic.jpg"}
+              src={profileImageUrl || "/default-pic.jpg"}
               alt="Profile image"
               fill
+              sizes="160px"
               className="rounded-full object-cover object-center border-4 border-salmon2"
             />
             {/*The Pen Edit Button */}
@@ -72,13 +83,13 @@ export default function ProfileWrapper({
             {/*The Profile Contact*/}
           </div>
           <div className="flex flex-col gap-2 items-center text-primaryT">
-            <h3 className="font-semibold text-2xl font-sans">John Doe</h3>
-            <p className="">john.doe@gmail.com</p>
+            <h3 className="font-semibold text-2xl font-sans">{name}</h3>
+            <p className="">{email}</p>
           </div>
         </div>
       </div>
       <div className="mt-22 md:mt-28 lg:mt-36">
-        <div className="flex justify-center gap-4">
+        <div className="flex justify-center items-center gap-4">
           <ul className="bg-white px-6 flex shadow-[0_4px_16px_0_rgba(17,34,17,0.05)] max-w-5xl w-full rounded-2xl">
             <li
               className={`flex-1  py-4 ${pathname === "/dashboard/profile" ? "border-b-2 border-secondaryT" : ""}`}

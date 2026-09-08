@@ -5,11 +5,22 @@ import { Card } from "@/components/shadcn-ul/card";
 import { Download, Share2, Plane } from "lucide-react";
 import { FlightDetail } from "@/static-data/flightDetailData";
 import { FlightBreadcrumb } from "../shared/flightBreadcrumb";
+import type { FlightBooking } from "@/lib/supabase/bookings";
 
-export function ConfirmationStep({ flight }: { flight: FlightDetail }) {
+export function ConfirmationStep({
+  flight,
+  booking,
+  passengerName,
+  fareClass,
+}: {
+  flight: FlightDetail;
+  booking: FlightBooking;
+  passengerName: string;
+  fareClass: string;
+}) {
   const [copied, setCopied] = useState(false);
   const segment = flight.segments[0];
-  const bookingRef = `${flight.airline.slice(0, 2).toUpperCase()}${flight.id}23`;
+  const bookingRef = booking.bookingRef;
 
   async function handleShare() {
     try {
@@ -84,12 +95,12 @@ export function ConfirmationStep({ flight }: { flight: FlightDetail }) {
             <div className="flex-1 p-5 space-y-4">
               <div className="flex items-center justify-between bg-secondaryT text-primaryT rounded-md px-4 py-2 -mx-1">
                 <div>
-                  <p className="font-semibold">John D.</p>
+                  <p className="font-semibold">{passengerName}</p>
                   <p className="text-xs opacity-80">
                     Boarding Pass N°{bookingRef}
                   </p>
                 </div>
-                <span className="text-sm font-semibold">Business Class</span>
+                <span className="text-sm font-semibold">{fareClass}</span>
               </div>
 
               <div className="grid grid-cols-4 gap-2 text-xs">
@@ -103,11 +114,11 @@ export function ConfirmationStep({ flight }: { flight: FlightDetail }) {
                 </div>
                 <div>
                   <p className="text-grey">Gate</p>
-                  <p className="font-semibold">A12</p>
+                  <p className="font-semibold">{booking.gate}</p>
                 </div>
                 <div>
                   <p className="text-grey">Seat</p>
-                  <p className="font-semibold">12B</p>
+                  <p className="font-semibold">{booking.seat}</p>
                 </div>
               </div>
 
@@ -131,7 +142,7 @@ export function ConfirmationStep({ flight }: { flight: FlightDetail }) {
             <p className="text-sm font-semibold">{flight.fromCode}</p>
             <div className="border-t border-dashed border-grey/40" />
             <p className="text-sm font-semibold self-end">{flight.toCode}</p>
-            <p className="text-xs text-grey mt-2">John D.</p>
+            <p className="text-xs text-grey mt-2">{passengerName}</p>
           </div>
         </Card>
 

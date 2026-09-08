@@ -1,36 +1,51 @@
 "use client";
 import { useState } from "react";
 import { Card } from "@/components/shadcn-ul/card";
-import { Button } from "@/components/shadcn-ul/button";
-import { X } from "lucide-react";
 import { EditableField } from "./editableField";
-import { AddEmailDialog } from "./addEmailDialog";
+import { updatePasswordAction } from "@/lib/supabase/auth-actions";
 
 interface AccountData {
   name: string;
-  email: string;
-  password: string;
   phone: string;
   address: string;
   dob: string;
-  secondaryEmails: string[];
 }
 
-const initialAccount: AccountData = {
-  name: "John Doe",
-  email: "john.doe@gmail.com",
-  password: "changeme123",
-  phone: "+1 000-000-0000",
-  address: "St 32 main downtown, Los Angeles, California, USA",
-  dob: "01-01-1992",
-  secondaryEmails: [],
-};
-
-export function AccountSection() {
-  const [account, setAccount] = useState<AccountData>(initialAccount);
+export function AccountSection({
+  initialName,
+  email,
+  initialPhone,
+  initialAddress,
+  initialDob,
+}: {
+  initialName: string;
+  email: string;
+  initialPhone: string;
+  initialAddress: string;
+  initialDob: string;
+}) {
+  const [account, setAccount] = useState<AccountData>({
+    name: initialName,
+    phone: initialPhone,
+    address: initialAddress,
+    dob: initialDob,
+  });
+  const [passwordError, setPasswordError] = useState<string | null>(null);
+  const [passwordSaved, setPasswordSaved] = useState(false);
 
   function update<K extends keyof AccountData>(key: K, value: AccountData[K]) {
     setAccount((prev) => ({ ...prev, [key]: value }));
+  }
+
+  async function handlePasswordSave(newPassword: string) {
+    setPasswordSaved(false);
+    const result = await updatePasswordAction(newPassword);
+    if ("error" in result) {
+      setPasswordError(result.error);
+      return;
+    }
+    setPasswordError(null);
+    setPasswordSaved(true);
   }
 
   return (
@@ -39,68 +54,48 @@ export function AccountSection() {
       <Card className="p-6 gap-0 divide-y divide-gray-100">
         <EditableField
           label="Name"
-          value={account.name}
+          value={account.name || "Add your name"}
           onSave={(v) => update("name", v)}
         />
-        {/*<div className="divide-y divide-gray-100">
+        <div className="flex items-center justify-between gap-4 py-5 sm:flex-row flex-col">
+          <div className="flex flex-col sm:items-start items-center">
+            <p className="text-sm text-grey">Email</p>
+            <p className="font-semibold mt-0.5">{email}</p>
+          </div>
+        </div>
+        <div>
           <EditableField
-            label="Email"
-            value={account.email}
-            type="email"
-            onSave={(v) => update("email", v)}
-            extraAction={
-              <AddEmailDialog
-                onAdd={(email) =>
-                  update("secondaryEmails", [...account.secondaryEmails, email])
-                }
-              />
-            }
+            label="Password"
+            value=""
+            displayValue={"•".repeat(12)}
+            type="password"
+            onSave={handlePasswordSave}
           />
-          {account.secondaryEmails.map((email) => (
-            <div
-              key={email}
-              className="flex items-center justify-between gap-4 py-5 flex-wrap"
-            >
-              <div>
-                <p className="text-sm text-grey">Additional email</p>
-                <p className="font-semibold mt-0.5">{email}</p>
-              </div>
-              <Button
-                variant="outline"
-                className="border-destructive text-destructive gap-1.5"
-                onClick={() =>
-                  update(
-                    "secondaryEmails",
-                    account.secondaryEmails.filter((e) => e !== email)
-                  )
-                }
-              >
-                <X className="w-3.5 h-3.5" /> Remove
-              </Button>
-            </div>
-          ))}
-        </div>*/}
-        <EditableField
-          label="Password"
-          value={account.password}
-          displayValue={"•".repeat(12)}
-          type="password"
-          onSave={(v) => update("password", v)}
-        />
+          {passwordError && (
+            <p className="text-destructive text-xs -mt-3 pb-3">
+              {passwordError}
+            </p>
+          )}
+          {passwordSaved && (
+            <p className="text-secondaryT text-xs -mt-3 pb-3">
+              Password updated.
+            </p>
+          )}
+        </div>
         <EditableField
           label="Phone number"
-          value={account.phone}
+          value={account.phone || "Add a phone number"}
           type="tel"
           onSave={(v) => update("phone", v)}
         />
         <EditableField
           label="Address"
-          value={account.address}
+          value={account.address || "Add an address"}
           onSave={(v) => update("address", v)}
         />
         <EditableField
           label="Date of birth"
-          value={account.dob}
+          value={account.dob || "Add your date of birth"}
           onSave={(v) => update("dob", v)}
         />
       </Card>

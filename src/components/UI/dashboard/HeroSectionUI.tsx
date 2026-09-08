@@ -20,6 +20,7 @@ export function HeroSection({
             src={image}
             alt="Hero Image"
             fill
+            sizes="100vw"
             // priority
             className="object-cover object-top"
           />

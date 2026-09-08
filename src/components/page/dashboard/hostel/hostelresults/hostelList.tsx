@@ -44,11 +44,12 @@ export function HotelCard({ hotel }: { hotel: Hotel }) {
 
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow border border-gray-200 p-0 flex-row flex-wrap md:flex-nowrap">
-      <div className="relative w-full md:w-[380px] h-[220px] md:h-auto flex-shrink-0">
+      <div className="relative w-full md:w-[380px] md:max-w-[40%] h-[220px] md:h-auto flex-shrink-0">
         <Image
           src={hotel.images[0]}
           alt={hotel.name}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 40vw, 380px"
           className="object-cover"
         />
         <span className="absolute top-3 right-3 bg-black/60 text-white text-xs px-2 py-1 rounded">
@@ -56,7 +57,7 @@ export function HotelCard({ hotel }: { hotel: Hotel }) {
         </span>
       </div>
 
-      <div className="flex-1 p-5 flex flex-col gap-3">
+      <div className="flex-1 min-w-0 p-5 flex flex-col gap-3">
         <div className="flex items-start justify-between gap-4">
           <h3 className="text-lg font-semibold">{hotel.name}</h3>
           <div className="text-right flex-shrink-0">

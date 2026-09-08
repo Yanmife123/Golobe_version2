@@ -32,6 +32,7 @@ export default function Navbar() {
           // width={114}
           // height={34}
           fill={true}
+          sizes="114px"
           // style={{ width: "auto", height: "auto" }}
           className="brightness-100"
         />

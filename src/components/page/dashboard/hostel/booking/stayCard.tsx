@@ -25,7 +25,7 @@ export function StayCard({
 
       <div className="border rounded-lg px-3 py-2 flex items-center gap-3 w-fit">
         <div className="relative w-10 h-10 rounded overflow-hidden flex-shrink-0">
-          <Image src={room.image} alt={room.name} fill className="object-cover" />
+          <Image src={room.image} alt={room.name} fill sizes="40px" className="object-cover" />
         </div>
         <p className="text-sm max-w-xs">{room.name}</p>
       </div>

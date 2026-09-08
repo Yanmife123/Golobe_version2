@@ -7,32 +7,37 @@ import {
   PaymentPlanSelector,
   PayPlan,
 } from "../../flight/booking/paymentPlanSelector";
-import { LoginStep } from "../../flight/booking/loginStep";
-import { CardListStep, SavedCard } from "../../flight/booking/cardListStep";
+import { CardListStep, PaymentMethod } from "../../flight/booking/cardListStep";
 import { AddCardDialog } from "../../flight/booking/addCardDialog";
 import { StayCard } from "./stayCard";
 import { StayPriceSidebar } from "./stayPriceSidebar";
 import { ConfirmationStep } from "./confirmationStep";
 import { Hotel } from "@/static-data/hotelData";
 
-type Step = "login" | "payment" | "confirmation";
+type Step = "payment" | "confirmation";
 
 const CHECK_IN = "Fri, Dec 2";
 const CHECK_OUT = "Sun, Dec 4";
 const NIGHTS = 2;
 const GUESTS = "1 room, 2 guests";
 
-export function BookingWrapper({ hotel }: { hotel: Hotel }) {
+export function BookingWrapper({
+  hotel,
+  paymentMethods,
+}: {
+  hotel: Hotel;
+  paymentMethods: PaymentMethod[];
+}) {
   const searchParams = useSearchParams();
   const roomId = searchParams.get("room");
   const room = hotel.rooms.find((r) => r.id === roomId) ?? hotel.rooms[0];
 
-  const [step, setStep] = useState<Step>("login");
+  const [step, setStep] = useState<Step>("payment");
   const [payPlan, setPayPlan] = useState<PayPlan>("full");
-  const [cards, setCards] = useState<SavedCard[]>([
-    { id: "seed", last4: "4321", exp: "02/27" },
-  ]);
-  const [selectedCardId, setSelectedCardId] = useState<string | null>("seed");
+  const [cards, setCards] = useState<PaymentMethod[]>(paymentMethods);
+  const [selectedCardId, setSelectedCardId] = useState<string | null>(
+    paymentMethods[0]?.id ?? null
+  );
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const baseFare = room.pricePerNight * NIGHTS;
@@ -89,24 +94,24 @@ export function BookingWrapper({ hotel }: { hotel: Hotel }) {
               total={total}
             />
 
-            {step === "login" ? (
-              <LoginStep onContinue={() => setStep("payment")} />
-            ) : (
-              <>
-                <CardListStep
-                  cards={cards}
-                  selectedCardId={selectedCardId}
-                  onSelectCard={setSelectedCardId}
-                  onAddCardClick={() => setDialogOpen(true)}
-                />
-                <FormBtn
-                  disabled={!selectedCardId}
-                  onClick={() => setStep("confirmation")}
-                >
-                  Confirm &amp; Pay ${total}
-                </FormBtn>
-              </>
-            )}
+            <CardListStep
+              cards={cards}
+              selectedCardId={selectedCardId}
+              onSelectCard={setSelectedCardId}
+              onAddCardClick={() => setDialogOpen(true)}
+            />
+
+            <p className="text-xs text-grey text-center">
+              Demo checkout — no real payment is taken, no card network is
+              contacted.
+            </p>
+
+            <FormBtn
+              disabled={!selectedCardId}
+              onClick={() => setStep("confirmation")}
+            >
+              Confirm &amp; Pay ${total}
+            </FormBtn>
           </div>
 
           <div>

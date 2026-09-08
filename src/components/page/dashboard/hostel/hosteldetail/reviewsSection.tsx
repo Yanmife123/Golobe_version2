@@ -75,6 +75,7 @@ export function ReviewsSection({
                 src={review.avatar}
                 alt={review.name}
                 fill
+                sizes="40px"
                 className="object-cover"
               />
             </div>

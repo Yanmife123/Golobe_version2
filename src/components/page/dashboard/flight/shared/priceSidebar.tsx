@@ -19,6 +19,7 @@ export function PriceSidebar({
             src={flight.heroImage}
             alt={flight.title}
             fill
+            sizes="56px"
             className="object-cover"
           />
         </div>
